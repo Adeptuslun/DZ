@@ -5,3 +5,11 @@
 Студент Иванов получил 5 по предмету Математика.
 Студент Петрова получил 4 по предмету Информатика.
 Студент Краснов получил 5 по предмету Физика. */
+public class dz1 {
+    public static void main(String[] args) throws Exception {
+        String [] arrayData =  reader.ReadLineFromFile("DATA.txt");
+        for(int i = 0; i < arrayData.length; i++) {
+            System.out.println(arrayData[i]);
+        }
+    }
+}
