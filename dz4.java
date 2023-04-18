@@ -1,26 +1,32 @@
 //Реализуйте алгоритм сортировки пузырьком числового массива, результат после каждой итерации запишите в лог-файл
-public class dz4  {
-    public static void main(String[] args) throws Exception {
-        String [] arrayData =  reader.ReadLineFromFile("DATA.txt");
-        for(int i = 0; i < arrayData.length; i++) {
-            System.out.println(PrintLine(arrayData[i]));
-        }
-        
+import java.io.IOException;
+import java.util.logging.*;
+public class dz4 {
+    public static void main(String[] args) throws IOException {
+        Logger logger = Logger.getLogger(dz4.class.getName());
+        FileHandler fh = new FileHandler("log.xml");
+        logger.addHandler(fh);
+        XMLFormatter xml = new XMLFormatter();
+        fh.setFormatter(xml);
+        logger.info("Sorting");
+        int [] array = {2, 5, 1, -7, 3, 64, 0};
+        Logger.PrintArray(array);
+        int[] newArr = listSort(array);
+        System.out.printf("\n Отсортированный массив: \n");
+        reader.PrintArrayInt(newArr);
     }
-    public static StringBuilder PrintLine(String line) {
-        String line1 = line.replace("{", "");
-        String line2 = line1.replace("}", "");
-        String line3 = line2.replaceAll("\"", "");
-        String line4 = line3.replace("[", "");
-        String line5 = line4.replace("]", "");
-        StringBuilder result = new StringBuilder("");
-        String [] arrayData = line5.split(",");
-        String [] listName = {"Студент ", " получил ", " по предмету "};
-        for (int i =0; i < arrayData.length; i++) {
-            String[] arrData = arrayData[i].split(":");
-            result.append(listName[i]);
-            result.append(arrData[1]);
+    public static int[] listSort(int [] arr){
+        for(int k = 0; k < arr.length-1; k++) {
+            
+            for (int i = 0; i < arr.length - k-1; i++){
+                if (arr[i] > arr[i+1]) {
+                    int temp = arr[i];
+                    arr[i] = arr[i+1];
+                    arr[i+1] = temp;
+                }
             }
-        return result;
+        }
+        return arr;
     }
+    
 }
